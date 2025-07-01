@@ -1,4 +1,5 @@
 // src/utils/fetchProjects.ts
+const base = import.meta.env.BASE_URL; // "/" in dev, "/MyPortfolio/" in prod
 
 // TypeScript type for a simplified project structure used in the portfolio
 export type PortfolioProject = {
@@ -40,7 +41,7 @@ export async function fetchAndSaveProjects() {
 	try {
 		//fetch data from the local JSON file
 
-		const response = await fetch("./public/projects.json");
+		const response = await fetch(`${base}projects.json`);
 
 		if (!response.ok) throw new Error("GitHub API failed");
 
