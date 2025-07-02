@@ -1,39 +1,42 @@
+import { FaExternalLinkAlt } from "react-icons/fa";
 import type { PortfolioProject } from "../util/fetchProjects";
 
 
-export default function ProjectCard({ project }: { project: PortfolioProject }) {
-  const formattedDate = new Date(project.updated_at).toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
 
+interface Props {
+  project: PortfolioProject;
+}
+
+export default function ProjectCard({ project }: Props) {
   return (
-    <div className="bg-white dark:bg-gray-800 shadow-md rounded-2xl p-6 hover:shadow-lg transition-shadow flex flex-col justify-between h-full">
+    <article
+      className="bg-gray-800 dark:bg-gray-900 rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow transform hover:scale-[1.03] duration-300 flex flex-col justify-between"
+      tabIndex={0} // for accessibility: allow keyboard focus
+    >
       <div>
-        <h2 className="text-xl font-bold mb-2 text-blue-600 dark:text-blue-400">{project.name}</h2>
-        <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
-          {project.description ?? "No description provided."}
+        <h3 className="text-xl font-semibold text-emerald-400 mb-2">{project.name}</h3>
+        <p className="text-gray-300 text-sm mb-4 line-clamp-3">
+          {project.description || "No description available."}
         </p>
-        <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-          <span>
-            {project.language && (
-              <span className="inline-block bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full px-3 py-1 text-xs font-medium">
-                {project.language}
-              </span>
-            )}
-          </span>
-          <span>Updated: {formattedDate}</span>
-        </div>
       </div>
-      <a
-        href={project.html_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-6 inline-block text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-xl transition"
-      >
-        View on GitHub
-      </a>
-    </div>
+
+      <div className="flex items-center justify-between mt-auto">
+        {project.language && (
+          <span className="inline-block bg-emerald-700 text-emerald-300 text-xs font-medium px-3 py-1 rounded-full select-none">
+            {project.language}
+          </span>
+        )}
+
+        <a
+          href={project.html_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-emerald-400 hover:text-emerald-600 transition-colors flex items-center gap-1 text-sm font-semibold"
+          aria-label={`Visit ${project.name} repository`}
+        >
+          View Repo <FaExternalLinkAlt />
+        </a>
+      </div>
+    </article>
   );
 }
