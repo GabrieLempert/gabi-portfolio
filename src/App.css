@@ -1,18 +1,20 @@
+/* src/App.css */
 @import "tailwindcss";
 
 @theme {
-    --primary: #00
-    --secondary: #fff;
-    --accent: #f0f0f0;
-    --text: #333;
-    --background: #f9f9f9;
-    --border: #e0e0e0;
-    --shadow: rgba(0, 0, 0, 0.1);
-    --link: #1a73e8;
-    --link-hover: #0c63d0;
-    --button-bg: #1a73e8;
-    --button-text: #fff;
-    --button-hover-bg: #0c63d0;
-    --button-hover-text: #fff;
-    --font-family: 'Inter', sans-serif;
+	--color-background: #f4f1ea;
+	--color-text-primary: #2c1e1a;
+	--color-accent-sepia: #8d6e63;
+}
+
+/* Custom scrollbar to look like ink on parchment */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: #f4f1ea;
+}
+::-webkit-scrollbar-thumb {
+	background: #8d6e63;
+	border-radius: 4px;
 }
