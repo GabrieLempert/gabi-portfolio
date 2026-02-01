@@ -4,35 +4,31 @@
     "projects":[
   {
     "id": 426715481,
-    "name": "Car Game v1",
+    "name": "Car-Game-v1",
     "html_url": "https://github.com/GabrieLempert/Car-Game-v1",
     "description": "First assignment of the mobile application development course in AndroidStudio simple car game",
     "language": "Java",
     "created_at": "2021-11-10T17:31:04Z",
-    "updated_at": "2022-08-31T14:21:14Z",
-    "level": "beginner"
+    "updated_at": "2022-08-31T14:21:14Z"
   },
   {
     "id": 438009920,
-    "name": "Car Game v2",
+    "name": "Car-Game-v2",
     "html_url": "https://github.com/GabrieLempert/Car-Game-v2",
     "description": "Second assignment in mobile development course in AndroidStudio ",
     "language": "Java",
     "created_at": "2021-12-13T20:07:34Z",
-    "updated_at": "2022-08-31T14:22:14Z",
-    "level": "beginner"
+    "updated_at": "2022-08-31T14:22:14Z"
   },
   {
     "id": 417866559,
-    "name": "Coursera Project",
+    "name": "Coursera-Project",
     "html_url": "https://github.com/GabrieLempert/Coursera-Project",
     "description": "First course in HTML, CSS , vanillaJS with a little bit of AJAX callings and fetchAPI this are the assignments of the course ",
     "language": "JavaScript",
     "created_at": "2021-10-16T15:20:18Z",
-    "updated_at": "2022-08-31T14:19:10Z",
-    "level": "beginner"
+    "updated_at": "2022-08-31T14:19:10Z"
   },
-
   {
     "id": 354602568,
     "name": "Elections",
@@ -40,58 +36,52 @@
     "description": "First assignment in OOP course were I learned basic OOP concepts in Java",
     "language": "Java",
     "created_at": "2021-04-04T17:15:34Z",
-    "updated_at": "2022-08-31T14:17:38Z",
-    "level": "beginner"
+    "updated_at": "2022-08-31T14:17:38Z"
   },
   {
     "id": 369514929,
-    "name": "Elections Part2",
+    "name": "Elections-Part2",
     "html_url": "https://github.com/GabrieLempert/Elections-Part2",
     "description": "Part 2 of the homework for OOP course in Java where we learned basic concepts in OOP.",
     "language": "Java",
     "created_at": "2021-05-21T11:36:22Z",
-    "updated_at": "2022-08-31T14:16:25Z",
-    "level":"intermediate"
+    "updated_at": "2022-08-31T14:16:25Z"
   },
   {
     "id": 626879928,
-    "name": "Final Project",
+    "name": "Final-Project",
     "html_url": "https://github.com/GabrieLempert/Final-Project",
     "description": "My computer science final project that predicts a stock by a purchase or sell of a stock from a share holder",
     "language": "Jupyter Notebook",
     "created_at": "2023-04-12T10:46:16Z",
-    "updated_at": "2023-04-15T13:51:02Z",
-    "level": "advanced"
+    "updated_at": "2023-04-15T13:51:02Z"
   },
   {
     "id": 461983936,
-    "name": "Food Fun",
+    "name": "Food-Fun",
     "html_url": "https://github.com/GabrieLempert/Food-Fun",
     "description": "Final project application I wrote myself using a lot of framework mainly in android ",
     "language": "Java",
     "created_at": "2022-02-21T18:27:19Z",
-    "updated_at": "2022-08-31T14:24:48Z",
-    "level":"intermediate"
+    "updated_at": "2022-08-31T14:24:48Z"
   },
   {
     "id": 1012002709,
-    "name": "gabi portfolio",
+    "name": "gabi-portfolio",
     "html_url": "https://github.com/GabrieLempert/gabi-portfolio",
     "description": null,
     "language": "TypeScript",
     "created_at": "2025-07-01T16:51:41Z",
-    "updated_at": "2025-07-01T16:51:48Z",
-    "level": "intermediate"
+    "updated_at": "2025-07-01T16:51:48Z"
   },
   {
     "id": 515117996,
-    "name": "Graphic Course",
+    "name": "Graphic-Course",
     "html_url": "https://github.com/GabrieLempert/Graphic-Course",
     "description": "Course in OpenGL and Glut with basic graph concepts and algorithms",
     "language": "C++",
     "created_at": "2022-07-18T09:31:18Z",
-    "updated_at": "2022-08-31T14:16:55Z",
-    "level": "advanced"
+    "updated_at": "2022-08-31T14:16:55Z"
   },
   {
     "id": 652033013,
@@ -100,38 +90,34 @@
     "description": "Leeto: Trip Planner & Shopping Assistant. Effortlessly schedule trips, manage supplies, meals & ingredients. Simplify planning with visual calendars, comprehensive shopping lists. Stay organized, save time, and enjoy seamless travel experiences. Available on mobile for an enjoyable journey.",
     "language": "Java",
     "created_at": "2023-06-10T21:45:50Z",
-    "updated_at": "2023-06-10T21:46:12Z",
-    "level": "intermediate"
+    "updated_at": "2023-06-10T21:46:12Z"
   },
   {
     "id": 633779461,
-    "name": "Magic 8 Ball",
+    "name": "Magic-8-Ball-iOS13",
     "html_url": "https://github.com/GabrieLempert/Magic-8-Ball-iOS13",
     "description": "Learn to Code While Building Apps - The Complete iOS Development Bootcamp",
     "language": "Swift",
     "created_at": "2023-04-28T09:00:28Z",
-    "updated_at": "2023-04-28T09:00:44Z",
-    "level": "beginner"
+    "updated_at": "2023-04-28T09:00:44Z"
   },
   {
     "id": 495031532,
-    "name": "Programming languages",
+    "name": "Programming-leanguages",
     "html_url": "https://github.com/GabrieLempert/Programming-leanguages",
     "description": "Course the showcases problems in the world of programing languages using python",
     "language": "Python",
     "created_at": "2022-05-22T10:49:56Z",
-    "updated_at": "2022-08-31T14:23:57Z",
-    "level": "beginner"
+    "updated_at": "2022-08-31T14:23:57Z"
   },
   {
     "id": 669899479,
-    "name": "Project Parllel Computing",
+    "name": "ProjectParllelComputing",
     "html_url": "https://github.com/GabrieLempert/ProjectParllelComputing",
     "description": null,
     "language": "C",
     "created_at": "2023-07-23T19:42:31Z",
-    "updated_at": "2023-07-24T05:57:27Z",
-    "level":"intermediate"
+    "updated_at": "2023-07-24T05:57:27Z"
   },
   {
     "id": 560032248,
@@ -140,18 +126,16 @@
     "description": "Implementing Bulls and Cows algorithm in python with tkinter GUI ",
     "language": "Python",
     "created_at": "2022-10-31T15:45:04Z",
-    "updated_at": "2022-10-31T15:50:29Z",
-    "level": "intermediate"
+    "updated_at": "2022-10-31T15:50:29Z"
   },
   {
     "id": 633779631,
-    "name": "Quizzler-iOS",
+    "name": "Quizzler-iOS13",
     "html_url": "https://github.com/GabrieLempert/Quizzler-iOS13",
     "description": "Learn about Classes and Objects by building a Quiz App - The Complete iOS Development Bootcamp",
     "language": "Swift",
     "created_at": "2023-04-28T09:00:53Z",
-    "updated_at": "2023-04-28T09:01:05Z",
-    "level": "beginner"
+    "updated_at": "2023-04-28T09:01:05Z"
   },
   {
     "id": 682097615,
@@ -160,8 +144,7 @@
     "description": "A promotion page for work",
     "language": "EJS",
     "created_at": "2023-08-23T12:40:46Z",
-    "updated_at": "2023-08-23T21:42:15Z",
-    "level": "beginner"
+    "updated_at": "2023-08-23T21:42:15Z"
   },
   {
     "id": 495030688,
@@ -170,8 +153,7 @@
     "description": "All the assignments in my OS course mainly written in C ",
     "language": "C",
     "created_at": "2022-05-22T10:46:05Z",
-    "updated_at": "2022-08-31T14:23:05Z",
-    "level": "intermediate"
+    "updated_at": "2022-08-31T14:23:05Z"
   }]
   }
 ]
