@@ -7,19 +7,14 @@ import AnimatedSection from "./util/motion";
 
 function App() {
 	return (
-		<div className="font-sans text-black-900 bg-white dark:bg-gray-900 dark:text-white w-full min-w-full">
-			<AnimatedSection>
-				<Hero />
-			</AnimatedSection>
+		<div className="min-h-screen bg-[#f0e6d2] text-[#3e2723] font-serif selection:bg-[#8d6e63] selection:text-white overflow-x-hidden">
+			<Portfolio />
+
 			<AnimatedSection>
 				<Skills />
 			</AnimatedSection>
-			<AnimatedSection>
-				<Portfolio />
-			</AnimatedSection>
-			<AnimatedSection>
-				<Contact />
-			</AnimatedSection>
+
+			{/* Contact section can be added here similarly */}
 		</div>
 	);
 }
