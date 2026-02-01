@@ -1,104 +1,84 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useProjects } from "../hooks/useProjects";
-import ProjectCard from "../components/ProjectCard";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Hero } from "../sections/Hero";
 import { Education } from "../sections/Education";
 import { Experience } from "../sections/Experience";
 import { Skills } from "../sections/Skills";
+import { Projects } from "../sections/Projects"; // Modular projects section
 import { Contact } from "../sections/Contact";
 
-type Tab =
-	| "Home"
-	| "Academic"
-	| "Masteries"
-	| "Chronology"
-	| "Inventions"
-	| "Contact";
-
 export default function Portfolio() {
-	const [activeTab, setActiveTab] = useState<Tab>("Home");
-	const { projects = [] } = useProjects();
+  const [activeSection, setActiveSection] = useState("home");
+  const containerRef = useRef<HTMLDivElement>(null);
 
-	const renderSection = () => {
-		switch (activeTab) {
-			case "Home":
-				return <Hero />;
-			case "Academic":
-				return <Education />;
-			case "Masteries":
-				return <Skills />;
-			case "Chronology":
-				return <Experience />;
-			case "Inventions":
-				return (
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-						{projects?.map((p) => (
-							<ProjectCard
-								key={p.id}
-								project={p}
-							/>
-						))}
-					</div>
-				);
-			case "Contact":
-				return <Contact />;
-		}
-	};
+  // Memoize sections to fix dependency warnings and prevent re-renders
+  const sections = useMemo(() => [
+    { id: "home", label: "Home", component: <Hero /> },
+    { id: "education", label: "Education", component: <Education /> },
+    { id: "skills", label: "Skills", component: <Skills /> },
+    { id: "experience", label: "Experience", component: <Experience /> },
+    { id: "projects", label: "Projects", component: <Projects /> },
+    { id: "contact", label: "Contact", component: <Contact /> }
+  ], []);
 
-	return (
-		<main className="h-screen flex text-[#2c1e1a] font-serif">
-			{/* Vertical Navigation Bar */}
-			<nav className="w-20 md:w-64 border-r-2 border-[#3e2723] bg-[#f4f1ea] flex flex-col items-center py-8 z-50">
-				<div className="text-3xl font-bold border-2 border-[#3e2723] px-3 py-1 mb-12">
-					GL
-				</div>
+  useEffect(() => {
+    const observerOptions = {
+      root: containerRef.current,
+      threshold: 0.6,
+    };
 
-				<div className="flex flex-col gap-8 w-full px-4">
-					{(
-						[
-							"Home",
-							"Academic",
-							"Masteries",
-							"Chronology",
-							"Inventions",
-							"Contact",
-						] as Tab[]
-					).map((tab) => (
-						<button
-							key={tab}
-							onClick={() => setActiveTab(tab)}
-							className={`text-xs md:text-sm uppercase font-bold tracking-widest text-left transition-all hover:text-[#8d6e63] ${
-								activeTab === tab
-									? "text-[#8d6e63] translate-x-2"
-									: "opacity-60"
-							}`}>
-							{activeTab === tab && (
-								<span className="mr-2">❧</span>
-							)}
-							{tab}
-						</button>
-					))}
-				</div>
-			</nav>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
 
-			{/* Main Display Stage */}
-			<section className="flex-grow relative bg-white/20 overflow-y-auto">
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={activeTab}
-						initial={{ opacity: 0, y: 10 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -10 }}
-						transition={{ duration: 0.3 }}
-						className="p-8 md:p-16 max-w-6xl mx-auto">
-						{renderSection()}
-					</motion.div>
-				</AnimatePresence>
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
 
-				{/* Parchment Overlay Decor */}
-				<div className="absolute inset-0 pointer-events-none opacity-10 bg-[url('https://www.transparenttextures.com/patterns/parchment.png')]" />
-			</section>
-		</main>
-	);
+    return () => observer.disconnect();
+  }, [sections]); // sections is now a stable dependency
+
+  return (
+    <main className="flex h-screen w-screen bg-[#f4f1ea] font-serif overflow-hidden">
+      {/* Sidebar Navigation */}
+      <nav className="w-20 md:w-64 border-r border-[#3e2723]/20 flex flex-col items-center py-10 z-50 bg-[#f4f1ea]">
+        <div className="text-3xl font-bold border-2 border-[#3e2723] px-3 py-1 mb-20 shadow-[3px_3px_0px_#8d6e63]">GL</div>
+        <div className="flex flex-col gap-10 w-full px-8">
+          {sections.map((s) => (
+            <a 
+              key={s.id} 
+              href={`#${s.id}`} 
+              className={`flex items-center gap-3 text-xs md:text-sm uppercase font-bold tracking-widest transition-all duration-500 ${
+                activeSection === s.id ? "text-[#8d6e63] translate-x-4" : "opacity-40 hover:opacity-100"
+              }`}
+            >
+              <span className={`transition-opacity ${activeSection === s.id ? "opacity-100" : "opacity-0"}`}>❧</span>
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      {/* Snap Scroll Container */}
+      <div ref={containerRef} className="flex-grow overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
+        {sections.map((s) => (
+          <section 
+            key={s.id} 
+            id={s.id} 
+            className="min-h-screen w-full snap-start flex flex-col items-center justify-center p-12 md:p-24 relative border-b border-[#8d6e63]/10"
+          >
+            <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
+              {s.component}
+            </div>
+            {/* Background Texture */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.04] bg-[url('https://www.transparenttextures.com/patterns/parchment.png')]" />
+          </section>
+        ))}
+      </div>
+    </main>
+  );
 }

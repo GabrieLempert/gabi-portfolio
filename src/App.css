@@ -1,20 +1,81 @@
-/* src/App.css */
 @import "tailwindcss";
 
 @theme {
-	--color-background: #f4f1ea;
-	--color-text-primary: #2c1e1a;
-	--color-accent-sepia: #8d6e63;
+	--color-parchment: #f4f1ea;
+	--color-ink-heavy: #3e2723;
+	--color-ink-sepia: #8d6e63;
+	--color-paper: #fdfbf7;
 }
 
-/* Custom scrollbar to look like ink on parchment */
-::-webkit-scrollbar {
-	width: 8px;
+html,
+body,
+#root {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden; /* Lock the root to prevent double bars */
+	background-color: var(--color-parchment);
 }
-::-webkit-scrollbar-track {
-	background: #f4f1ea;
+
+/* Fix for Snap Scrolling Container */
+.snap-container {
+	height: 100vh;
+	overflow-y: auto;
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
-::-webkit-scrollbar-thumb {
-	background: #8d6e63;
-	border-radius: 4px;
+
+.snap-container::-webkit-scrollbar {
+	display: none;
+}
+
+/* Ensure every section is a perfectly centered viewport */
+.snap-section {
+	scroll-snap-align: start;
+	min-h-screen: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 4rem 2rem;
+	position: relative;
+	border-bottom: 1px solid rgba(141, 110, 99, 0.1);
+}
+
+/* Standardized Card Style */
+.card-base {
+	background-color: var(--color-paper);
+	border: 1px solid rgba(141, 110, 99, 0.3);
+	position: relative;
+	transition: all 0.3s ease;
+}
+
+.card-base::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 12px;
+	height: 12px;
+	border-top: 2px solid var(--color-ink-heavy);
+	border-left: 2px solid var(--color-ink-heavy);
+}
+
+/* Add to src/App.css */
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+/* Ensure the parchment texture is subtle across the whole app */
+body {
+	background-color: #f4f1ea; /* Global Parchment */
+	color: #3e2723; /* Global Ink */
 }

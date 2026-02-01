@@ -1,17 +1,18 @@
-import { About } from "./About";
-
+// src/sections/Hero.tsx
 export function Hero() {
-  return (
-    <section className="min-h-screen flex flex-col justify-center items-center text-center p-8 bg-gradient-to-b from-blue-50 to-white">
-      <h1 className="text-5xl font-bold mb-4">Hi, I'm Gabriel Lempert</h1>
-      <p className="text-xl mb-6">Junior Full-Stack Developer</p>
-      <a
-        href="#skills"
-        className="px-6 py-3 bg-emerald-600 text-white rounded-xl shadow hover:bg-blue-200 transition"
-      >
-        View My Work
-      </a>
-         <About />
-    </section>
-  );
+	return (
+		<div className="text-center space-y-6">
+			<h1 className="text-5xl md:text-7xl font-bold text-[#3e2723] tracking-tighter">
+				Gabriel Lempert
+			</h1>
+			<p className="text-xl md:text-2xl italic text-[#8d6e63] font-serif uppercase tracking-[0.3em]">
+				Junior Full-Stack Developer
+			</p>
+			<div className="w-24 h-px bg-[#3e2723] mx-auto opacity-40" />
+			<p className="max-w-2xl mx-auto text-lg leading-relaxed italic opacity-80">
+				"Junior software developer with a strong CS background and
+				hands-on experience in support and QA roles." [cite: 5]
+			</p>
+		</div>
+	);
 }
