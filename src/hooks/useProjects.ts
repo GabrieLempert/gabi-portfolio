@@ -1,8 +1,8 @@
-// hooks/useProjects.ts
 import { useEffect, useState } from "react";
-import { fetchAndSaveProjects, type PortfolioProject } from "../util/fetchProjects";
-
-
+import {
+	fetchAndSaveProjects,
+	type PortfolioProject,
+} from "../util/fetchProjects";
 
 type ProjectData = {
 	meta: {
@@ -13,50 +13,68 @@ type ProjectData = {
 };
 
 export function useProjects() {
-	const [projects, setProjects] = useState<PortfolioProject[]|null>(null);
+	const [projects, setProjects] = useState<PortfolioProject[] | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<Error | null>(null);
 	const LOCAL_STORAGE_KEY = "portfolioProjects";
 
-
-
 	useEffect(() => {
 		const loadProjects = async () => {
 			try {
-                
-				const response = await fetchAndSaveProjects();
-				if (!response || response.length === 0) {
-                    throw new Error("No projects found");
-                }
-				const freshData:ProjectData = {
-                        meta: {
-                                createdAt: new Date().toISOString(),
-                                updatedAt: new Date().toISOString(),
-                        },
-                        projects: response,
-                };
-
+				// 1. שליפת נתונים מה-Cache (Local Storage) במידה וקיימים
 				const cachedRaw = localStorage.getItem(LOCAL_STORAGE_KEY);
 				const cached = cachedRaw
 					? (JSON.parse(cachedRaw) as ProjectData)
 					: null;
 
-				if (
-					!cached ||
-					new Date(freshData.meta.updatedAt) >
-						new Date(cached.meta.updatedAt)
-				) {
-					localStorage.setItem(
-						LOCAL_STORAGE_KEY,
-						JSON.stringify(freshData),
-					);
-					setProjects(freshData.projects);
-				} else {
+				// עדכון ראשוני מהיר מה-Cache כדי שהמשתמש לא יחכה ל-API
+				if (cached) {
 					setProjects(cached.projects);
 				}
+
+				// 2. פנייה ל-GitHub לקבלת הנתונים הכי עדכניים
+				const freshProjects = await fetchAndSaveProjects();
+
+				if (!freshProjects || freshProjects.length === 0) {
+					throw new Error("No projects found");
+				}
+
+				// 3. בדיקה האם יש הבדל בין הנתונים החדשים לנתונים השמורים
+				// אנו משווים את תוכן המערכים כשלעצמם
+				const freshDataString = JSON.stringify(freshProjects);
+				const cachedDataString = cached
+					? JSON.stringify(cached.projects)
+					: null;
+
+				if (freshDataString !== cachedDataString) {
+					console.log("Difference detected! Updating projects...");
+
+					const newData: ProjectData = {
+						meta: {
+							createdAt:
+								cached?.meta.createdAt ||
+								new Date().toISOString(),
+							updatedAt: new Date().toISOString(),
+						},
+						projects: freshProjects,
+					};
+
+					// עדכון ה-Local Storage וה-State רק אם יש שינוי
+					localStorage.setItem(
+						LOCAL_STORAGE_KEY,
+						JSON.stringify(newData),
+					);
+					setProjects(freshProjects);
+				} else {
+					console.log("No changes detected in GitHub repos.");
+				}
+
 				setError(null);
-			} catch (error) {
-				console.error("Error fetching projects:", error);
+			} catch (err) {
+				console.error("Error fetching projects:", err);
+				setError(
+					err instanceof Error ? err : new Error("Unknown error"),
+				);
 			} finally {
 				setLoading(false);
 			}
