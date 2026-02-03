@@ -1,46 +1,45 @@
 // hooks/useProjects.ts
 import { useEffect, useState } from "react";
-import { fetchAndSaveProjects, type PortfolioProject } from "../util/fetchProjects";
+import {
+	fetchAndSaveProjects,
+	type PortfolioProject,
+} from "../util/fetchProjects";
 
 export function useProjects() {
-    const [projects, setProjects] = useState<PortfolioProject[] | null>(null);
-    const [loading, setLoading] = useState(true);
-    const LOCAL_JSON_KEY = "github_projects_cache";
+	const [projects, setProjects] = useState<PortfolioProject[] | null>(null);
+	const [loading, setLoading] = useState(true);
+	const SYNC_INTERVAL = 30 * 60 * 1000; // 30 דקות במילישניות
+	useEffect(() => {
+		const syncWithGithub = async () => {
+			try {
+				const lastSync = localStorage.getItem("last_github_sync");
+				const now = Date.now();
 
-    useEffect(() => {
-        const syncWithGithub = async () => {
-            try {
-                // 1. קריאת API ל-GitHub (הנתונים הכי טריים)
-                const freshProjects = await fetchAndSaveProjects();
-                
-                // 2. שליפת ה-JSON הקיים מה-Storage (המצב האחרון ששמרנו)
-                const cachedJson = localStorage.getItem(LOCAL_JSON_KEY);
-                const freshProjectsString = JSON.stringify(freshProjects);
+				// אם עבר פחות מחצי שעה, נשתמש ב-Cache ולא נפנה ל-API
+				if (lastSync && now - parseInt(lastSync) < SYNC_INTERVAL) {
+					const cached = localStorage.getItem(
+						"github_projects_cache",
+					);
+					if (cached) {
+						setProjects(JSON.parse(cached));
+						setLoading(false);
+						return;
+					}
+				}
 
-                // 3. השוואה: האם הנתונים מ-GitHub שונים ממה ששמור אצלנו?
-                if (freshProjectsString !== cachedJson) {
-                    console.log("🔄 Change detected on GitHub! Updating local JSON and state.");
-                    
-                    // שמירת ה-JSON החדש (במקום הקובץ הפיזי)
-                    localStorage.setItem(LOCAL_JSON_KEY, freshProjectsString);
-                    
-                    // עדכון התצוגה במטריצה
-                    setProjects(freshProjects);
-                } else {
-                    console.log("✅ GitHub data matches our local JSON. No update needed.");
-                    if (cachedJson) {
-                        setProjects(JSON.parse(cachedJson));
-                    }
-                }
-            } catch (err) {
-                console.error("Sync failed:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
+				const freshProjects = await fetchAndSaveProjects();
+				const freshString = JSON.stringify(freshProjects);
+				localStorage.setItem("github_projects_cache", freshString);
+				localStorage.setItem("last_github_sync", now.toString()); // עדכון זמן הסנכרון
+				setProjects(freshProjects);
+			} catch (err) {
+				console.error("Sync failed:", err);
+			} finally {
+				setLoading(false);
+			}
+		};
+		syncWithGithub();
+	}, [SYNC_INTERVAL]);
 
-        syncWithGithub();
-    }, []);
-
-    return { projects, loading };
+	return { projects, loading };
 }

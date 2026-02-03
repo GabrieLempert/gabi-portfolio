@@ -1,5 +1,5 @@
 // src/utils/fetchProjects.ts
-const gitHubURL = import.meta.env.VITE_GITHUB_URL;
+const gitHubURL = 'https://api.github.com/users/GabrieLempert/repos';
 // "/" in dev, "/MyPortfolio/" in prod
 
 // TypeScript type for a simplified project structure used in the portfolio
