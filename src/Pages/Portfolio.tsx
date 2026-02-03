@@ -71,8 +71,16 @@ export default function Portfolio() {
             id={s.id} 
             className="min-h-screen w-full snap-start flex flex-col items-center justify-center p-12 md:p-24 relative border-b border-[#8d6e63]/10"
           >
-            <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
-              {s.component}
+            <div className="relative w-full max-w-6xl border border-[#8d6e63]/20 bg-[#fdfbf7]/40 p-6 md:p-12 shadow-sm">
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#3e2723]/40" />
+              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#3e2723]/40" />
+              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#3e2723]/40" />
+              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#3e2723]/40" />
+              
+              <div className="flex flex-col items-center w-full">
+                {s.component}
+              </div>
             </div>
             {/* Background Texture */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.04] bg-[url('https://www.transparenttextures.com/patterns/parchment.png')]" />

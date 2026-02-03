@@ -11,7 +11,7 @@ export function Hero() {
 			<div className="w-24 h-px bg-[#3e2723] mx-auto opacity-40" />
 			<p className="max-w-2xl mx-auto text-lg leading-relaxed italic opacity-80">
 				"Junior software developer with a strong CS background and
-				hands-on experience in support and QA roles." [cite: 5]
+				hands-on experience in support and QA roles."
 			</p>
 		</div>
 	);

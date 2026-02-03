@@ -1,81 +1,40 @@
 @import "tailwindcss";
 
 @theme {
-	--color-parchment: #f4f1ea;
-	--color-ink-heavy: #3e2723;
-	--color-ink-sepia: #8d6e63;
-	--color-paper: #fdfbf7;
+  --color-parchment: #f4f1ea;
+  --color-ink-heavy: #3e2723;
+  --color-ink-sepia: #8d6e63;
+  --color-paper: #fdfbf7;
 }
 
-html,
-body,
-#root {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	overflow: hidden; /* Lock the root to prevent double bars */
-	background-color: var(--color-parchment);
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Lock root to prevent double scrollbars */
+  background-color: var(--color-parchment);
 }
 
-/* Fix for Snap Scrolling Container */
-.snap-container {
-	height: 100vh;
-	overflow-y: auto;
-	scroll-snap-type: y mandatory;
-	scroll-behavior: smooth;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-
-.snap-container::-webkit-scrollbar {
-	display: none;
-}
-
-/* Ensure every section is a perfectly centered viewport */
-.snap-section {
-	scroll-snap-align: start;
-	min-h-screen: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 4rem 2rem;
-	position: relative;
-	border-bottom: 1px solid rgba(141, 110, 99, 0.1);
-}
-
-/* Standardized Card Style */
-.card-base {
-	background-color: var(--color-paper);
-	border: 1px solid rgba(141, 110, 99, 0.3);
-	position: relative;
-	transition: all 0.3s ease;
-}
-
-.card-base::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 12px;
-	height: 12px;
-	border-top: 2px solid var(--color-ink-heavy);
-	border-left: 2px solid var(--color-ink-heavy);
-}
-
-/* Add to src/App.css */
+/* Scroll-Snap Behavior */
 .no-scrollbar::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
-
 .no-scrollbar {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Ensure the parchment texture is subtle across the whole app */
-body {
-	background-color: #f4f1ea; /* Global Parchment */
-	color: #3e2723; /* Global Ink */
+.snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* Text Selection Theme */
+::selection {
+  background-color: var(--color-ink-sepia);
+  color: white;
 }
