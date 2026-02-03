@@ -7,7 +7,10 @@ export function Experience() {
 			period: "Nov 2022 - Present",
 			points: [
 				"Resolved L1-L3 issues",
-				"Created scripts for automation",
+				"Created scripts for automation and data migration",
+				"Collaborated with cross-functional teams",
+				"Provided technical training to junior staff",
+				"Maintained documentation for support processes",
 			],
 		},
 		{
@@ -17,6 +20,9 @@ export function Experience() {
 			points: [
 				"Monitored production servers ",
 				"Managed Linux releases ",
+				"Conducted manual testing for new features",
+				"Reported bugs and collaborated with developers",
+				"Ensured product quality and reliability",
 			],
 		},
 	];

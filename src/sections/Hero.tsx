@@ -1,3 +1,5 @@
+import { About } from "./About";
+
 // src/sections/Hero.tsx
 export function Hero() {
 	return (
@@ -13,6 +15,9 @@ export function Hero() {
 				"Junior software developer with a strong CS background and
 				hands-on experience in support and QA roles."
 			</p>
+			<div>
+				<About />
+			</div>
 		</div>
 	);
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Hero } from "../sections/Hero";
+
 import { Education } from "../sections/Education";
 import { Experience } from "../sections/Experience";
 import { Skills } from "../sections/Skills";
