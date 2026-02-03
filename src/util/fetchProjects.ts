@@ -1,6 +1,6 @@
 // src/utils/fetchProjects.ts
-const gitHubURL = import .meta.env.VITE_GITHUB_URL;
- // "/" in dev, "/MyPortfolio/" in prod
+const gitHubURL = import.meta.env.VITE_GITHUB_URL;
+// "/" in dev, "/MyPortfolio/" in prod
 
 // TypeScript type for a simplified project structure used in the portfolio
 export type PortfolioProject = {
@@ -26,32 +26,38 @@ type GitHubRepo = {
 };
 
 export function transformProjects(data: GitHubRepo[]): PortfolioProject[] {
+	if (!data || !Array.isArray(data)) return [];
+
 	return data.map((repo) => ({
-		id: repo.id, // Assuming id is available in the GitHub data
+		id: repo.id,
 		name: repo.name,
 		html_url: repo.html_url,
-		description: repo.description,
+		description: repo.description || "Invention in progress...",
 		language: repo.language,
 		created_at: repo.created_at,
 		updated_at: repo.updated_at,
 	}));
 }
 
-// Fetch and transform GitHub repo data, then save to local JSON
-export async function fetchAndSaveProjects() {
+export async function fetchAndSaveProjects(): Promise<PortfolioProject[]> {
 	try {
-		//fetch data from the local JSON file
+		// קריאת API ישירות ל-GitHub
+		const response = await fetch(gitHubURL, {
+			headers: {
+				// אופציונלי: הוסיפי Token אם את חורגת מהמכסה של GitHub
+				Accept: "application/vnd.github.v3+json",
+			},
+		});
 
-		const response = await fetch(`${gitHubURL}`);
-		
-		if (!response.ok) throw new Error("GitHub API failed");
+		if (!response.ok)
+			throw new Error(`GitHub API error: ${response.status}`);
 
 		const rawData = await response.json();
-		
-		const transformed = transformProjects(rawData[0].projects);
-		// return the saved data
-		return transformed;
+
+		// GitHub מחזיר מערך של repos, אז נעביר אותו ישירות לטרנספורמציה
+		return transformProjects(rawData);
 	} catch (err) {
-		console.error("❌ Failed to fetch projects from GitHub:", err);
+		console.error("❌ Failed to fetch from GitHub API:", err);
+		return [];
 	}
 }

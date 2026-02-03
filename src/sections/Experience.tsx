@@ -6,8 +6,8 @@ export function Experience() {
 			company: "Advantive (Pepperi)",
 			period: "Nov 2022 - Present",
 			points: [
-				"Resolved L1-L3 issues [cite: 14, 18]",
-				"Created scripts for automation [cite: 19]",
+				"Resolved L1-L3 issues",
+				"Created scripts for automation",
 			],
 		},
 		{
@@ -15,8 +15,8 @@ export function Experience() {
 			company: "Bright Data",
 			period: "Aug 2021 - Aug 2022",
 			points: [
-				"Monitored production servers [cite: 23, 26]",
-				"Managed Linux releases [cite: 27]",
+				"Monitored production servers ",
+				"Managed Linux releases ",
 			],
 		},
 	];
